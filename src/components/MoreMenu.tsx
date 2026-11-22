@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useTemporaryState } from '../hooks/useTemporaryState'
 import { copyText } from '../utils/copyText'
 import {
-  ChevronLeftIcon,
+  MoreIcon,
   MoonIcon,
   ShareIcon,
   SunIcon,
@@ -14,9 +14,21 @@ type MoreMenuProps = {
   showToast: (message: string) => void
 }
 
+// A hard outline keeps the rigid, square-edged look while staying legible on
+// both the blue trigger and the light/dark drawer surfaces.
+const FOCUS =
+  'focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue dark:focus-visible:outline-brand-sky'
+
+// Remove the double-tap zoom delay and the default blue tap flash on touch.
+const TOUCH = 'touch-manipulation [-webkit-tap-highlight-color:transparent]'
+
+// Both drawer actions share one hit target, type treatment and border weight.
+const ACTION =
+  'flex min-h-12 w-full cursor-pointer items-center rounded-md border-2 border-slate-950 px-3 py-2.5 font-display text-xs font-bold uppercase tracking-wider text-slate-900 transition-colors motion-reduce:transition-none dark:border-slate-600 dark:text-white'
+
 export function MoreMenu({ isDark, onToggleTheme, showToast }: MoreMenuProps) {
   const [isOpen, setIsOpen] = useState(false)
-  const [shareLabel, setShareLabel] = useTemporaryState('SHARE LINK')
+  const [shareLabel, setShareLabel] = useTemporaryState('SALIN LINK')
   const wrapperRef = useRef<HTMLElement>(null)
   const toggleRef = useRef<HTMLButtonElement>(null)
 
@@ -48,7 +60,7 @@ export function MoreMenu({ isDark, onToggleTheme, showToast }: MoreMenuProps) {
       return
     }
     showToast('LINK LANDING PAGE BERHASIL DISALIN!')
-    setShareLabel('COPIED!')
+    setShareLabel('TERSALIN!')
   }
 
   return (
@@ -57,7 +69,7 @@ export function MoreMenu({ isDark, onToggleTheme, showToast }: MoreMenuProps) {
       id="more-drawer-wrapper"
       data-reveal
       data-reveal-delay="680"
-      className="relative z-40 flex w-full flex-col-reverse shadow-[-4px_-4px_0px_#020617] max-sm:pb-[env(safe-area-inset-bottom)] sm:absolute sm:right-0 sm:top-1/2 sm:w-auto sm:-translate-y-1/2 sm:flex-row-reverse sm:items-center sm:shadow-none"
+      className="relative z-40 flex w-full items-center justify-center pb-[env(safe-area-inset-bottom)] sm:absolute sm:right-0 sm:top-1/2 sm:w-auto sm:-translate-y-1/2 sm:flex-row-reverse sm:items-center sm:pb-0"
     >
       <button
         ref={toggleRef}
@@ -69,16 +81,14 @@ export function MoreMenu({ isDark, onToggleTheme, showToast }: MoreMenuProps) {
           isOpen ? 'Tutup menu opsi tambahan' : 'Buka menu opsi tambahan'
         }
         onClick={() => setIsOpen((current) => !current)}
-        className="flex min-h-12 w-full cursor-pointer items-center justify-center gap-3 rounded-b-md border-2 border-slate-950 bg-brand-blue px-4 text-white transition-colors hover:bg-brand-sky motion-reduce:transition-none sm:h-16 sm:min-h-0 sm:w-11 sm:justify-center sm:rounded-l-md sm:rounded-b-none sm:border-y-2 sm:border-l-2 sm:border-r-0 sm:px-0 sm:shadow-[-3px_3px_0px_#020617] dark:border-white"
+        className={`inline-flex min-h-12 cursor-pointer items-center justify-center gap-2.5 rounded-md border-2 border-slate-950 bg-brand-blue px-5 font-display text-xs font-bold uppercase tracking-widest text-white shadow-[3px_3px_0px_#020617] transition-colors hover:bg-brand-sky active:translate-x-0.5 active:translate-y-0.5 active:shadow-none motion-reduce:transition-none dark:border-white dark:shadow-[3px_3px_0px_#008CD5] sm:h-16 sm:min-h-0 sm:w-11 sm:rounded-l-md sm:rounded-r-none sm:rounded-b-none sm:border-y-2 sm:border-l-2 sm:border-r-0 sm:px-0 sm:shadow-[-3px_3px_0px_#020617] ${FOCUS} ${TOUCH}`}
       >
-        <span className="font-display text-xs font-bold uppercase tracking-widest sm:hidden">
-          MENU OPSI
-        </span>
-        <ChevronLeftIcon
+        <MoreIcon
           className={`h-5 w-5 shrink-0 transition-transform duration-200 motion-reduce:transition-none sm:h-6 sm:w-6 ${
-            isOpen ? '-rotate-90 sm:rotate-180' : 'rotate-90 sm:rotate-0'
+            isOpen ? 'rotate-90' : 'rotate-0'
           }`}
         />
+        <span className="sm:hidden">MENU OPSI</span>
       </button>
 
       <div
@@ -87,31 +97,21 @@ export function MoreMenu({ isDark, onToggleTheme, showToast }: MoreMenuProps) {
         aria-label="Menu Tambahan"
         aria-hidden={!isOpen}
         inert={!isOpen}
-        className={`absolute bottom-full left-0 z-10 w-full origin-bottom overflow-hidden rounded-t-md border-2 border-b-0 border-slate-950 bg-white p-3.5 transition-all duration-200 motion-reduce:transition-none sm:relative sm:bottom-auto sm:left-auto sm:mr-2 sm:w-64 sm:origin-right sm:rounded-md sm:border-b-2 sm:overflow-visible sm:shadow-rigid-blue dark:border-brand-sky dark:bg-[#0B1B2B] sm:dark:shadow-rigid-amber ${
+        className={`absolute bottom-full left-1/2 z-10 mb-3.5 w-[min(19rem,calc(100vw-2.5rem))] -translate-x-1/2 origin-bottom rounded-md border-2 border-slate-950 bg-white p-2.5 shadow-[4px_4px_0px_#020617] overscroll-contain transition-[opacity,transform] duration-200 ease-out motion-reduce:transition-none dark:border-brand-sky dark:bg-[#0B1B2B] dark:shadow-[4px_4px_0px_#008CD5] sm:relative sm:bottom-auto sm:left-auto sm:mr-2 sm:mb-0 sm:w-64 sm:translate-x-0 sm:translate-y-0 sm:origin-right sm:border-b-2 sm:shadow-rigid-blue sm:dark:shadow-rigid-amber ${
           isOpen
-            ? 'max-h-96 opacity-100 sm:max-h-none sm:translate-x-0 sm:scale-100 sm:opacity-100'
-            : 'pointer-events-none max-h-0 opacity-0 sm:max-h-none sm:translate-x-3 sm:scale-95 sm:opacity-0'
+            ? 'translate-y-0 opacity-100 sm:scale-100'
+            : 'pointer-events-none translate-y-3 opacity-0 sm:translate-x-3 sm:scale-95'
         }`}
       >
-        <div className="mb-2.5 flex items-center justify-between border-b-2 border-brand-blue/30 pb-2">
-          <span className="font-display text-xs font-bold uppercase tracking-widest text-brand-blue dark:text-brand-sky">
-            MORE OPTIONS
-          </span>
-          <span className="h-2 w-2 rounded-sm bg-brand-amber" />
-        </div>
-
         <div className="flex flex-col gap-2.5">
           <button
             id="share-link-btn"
             type="button"
             onClick={handleShare}
-            className="group flex min-h-11 w-full cursor-pointer items-center justify-between rounded-md border border-slate-300 bg-slate-100 px-3 py-2.5 font-display text-xs font-bold uppercase tracking-wider text-slate-900 transition-colors hover:border-slate-950 hover:bg-brand-blue hover:text-white dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:hover:bg-brand-sky"
+            className={`group ${ACTION} gap-3 bg-slate-100 hover:border-brand-blue hover:bg-brand-blue hover:text-white active:bg-brand-sky dark:bg-slate-900 dark:hover:bg-brand-sky ${FOCUS} ${TOUCH}`}
           >
-            <span className="flex items-center gap-2">
-              <ShareIcon className="h-4 w-4 text-brand-blue group-hover:text-white dark:text-brand-sky" />
-              <span>{shareLabel}</span>
-            </span>
-            <span className="text-[10px] opacity-75">COPY</span>
+            <ShareIcon className="h-4 w-4 shrink-0 text-brand-blue group-hover:text-white dark:text-brand-sky" />
+            <span className="min-w-0 flex-1 truncate text-left">{shareLabel}</span>
           </button>
 
           <button
@@ -120,20 +120,23 @@ export function MoreMenu({ isDark, onToggleTheme, showToast }: MoreMenuProps) {
             role="switch"
             aria-checked={isDark}
             onClick={onToggleTheme}
-            className="flex min-h-11 w-full cursor-pointer items-center justify-between rounded-md border border-slate-300 bg-slate-100 px-3 py-2.5 font-display text-xs font-bold uppercase tracking-wider text-slate-900 transition-colors hover:bg-slate-200 dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:hover:bg-slate-800"
+            className={`${ACTION} justify-between bg-slate-100 hover:border-brand-blue hover:bg-slate-200 active:bg-slate-300 dark:bg-slate-900 dark:hover:bg-slate-800 ${FOCUS} ${TOUCH}`}
           >
-            <span className="flex items-center gap-2">
+            <span className="flex min-w-0 items-center gap-3">
               {isDark ? (
-                <MoonIcon className="h-4 w-4 text-brand-sky" />
+                <MoonIcon className="h-4 w-4 shrink-0 text-brand-sky" />
               ) : (
-                <SunIcon className="h-4 w-4 text-brand-amber" />
+                <SunIcon className="h-4 w-4 shrink-0 text-brand-amber" />
               )}
-              <span>{isDark ? 'DARK MODE' : 'LIGHT MODE'}</span>
+              <span className="truncate">MODE GELAP</span>
             </span>
-            <span className="flex h-5 w-9 items-center rounded-sm border border-slate-950 bg-slate-300 p-0.5 transition-colors dark:bg-brand-blue">
+            <span
+              aria-hidden="true"
+              className="flex h-6 w-11 shrink-0 items-center rounded-sm border-2 border-slate-950 bg-slate-300 p-0.5 transition-colors dark:border-brand-sky dark:bg-brand-blue"
+            >
               <span
-                className={`h-3.5 w-3.5 rounded-sm bg-slate-950 transition-transform duration-200 dark:bg-white ${
-                  isDark ? 'translate-x-4' : 'translate-x-0'
+                className={`h-4 w-4 rounded-sm bg-slate-950 transition-transform duration-200 motion-reduce:transition-none dark:bg-white ${
+                  isDark ? 'translate-x-5' : 'translate-x-0'
                 }`}
               />
             </span>
