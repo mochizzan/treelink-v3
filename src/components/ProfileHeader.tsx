@@ -44,18 +44,19 @@ export function ProfileHeader() {
         REDA
       </h1>
 
+      <span
+        translate="no"
+        className="mt-1 block text-[10px] font-medium tracking-widest text-brand-blue dark:text-brand-sky"
+      >
+        @.onlyreda
+      </span>
+
       <p
         data-reveal
         data-reveal-delay="380"
         className="mt-2.5 max-w-xs border-y border-brand-blue/30 px-3 py-2 text-xs font-medium leading-relaxed text-slate-600 sm:max-w-sm sm:text-sm dark:text-slate-300"
       >
         GAMING STREAMER • ROBLOX BUILDER • DIGITAL COMMUNITY HUB
-        <span
-          translate="no"
-          className="mt-1 block text-[10px] font-medium tracking-widest text-brand-blue dark:text-brand-sky"
-        >
-          @.onlyreda
-        </span>
       </p>
     </section>
   )
