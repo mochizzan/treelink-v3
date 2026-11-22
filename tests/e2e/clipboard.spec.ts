@@ -28,9 +28,9 @@ test('copies the tip URL from the top banner', async ({ page }) => {
 
   await expect(page.locator('#copy-tip-label')).toHaveText('COPIED!')
   await expect(page.getByRole('status')).toContainText(
-    'URL TIPME BERHASIL DISALIN!',
+    'URL TIPMI BERHASIL DISALIN!',
   )
-  expect(await readClipboard(page)).toBe('https://ko-fi.com/kairovortex')
+  expect(await readClipboard(page)).toBe('https://tipmi.gg/reda')
 })
 
 test('copies the landing page URL from the share menu', async ({ page }) => {

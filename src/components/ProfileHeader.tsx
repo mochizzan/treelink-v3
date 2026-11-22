@@ -24,7 +24,7 @@ export function ProfileHeader() {
           )}
         </div>
         <span className="absolute -bottom-1 -right-1 rounded-sm border-2 border-slate-950 bg-brand-amber px-2 py-0.5 font-display text-[10px] font-bold uppercase tracking-wider text-white">
-          PRO
+          CREATOR
         </span>
       </div>
 

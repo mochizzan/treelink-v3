@@ -17,7 +17,9 @@ export default function App() {
   const closeModal = useCallback(() => setActiveLink(null), [])
 
   return (
-    <div className="outer-accent-frame flex min-h-screen flex-col overflow-x-hidden p-3 font-mono text-slate-900 transition-colors duration-200 selection:bg-brand-sky selection:text-white sm:p-5 md:p-7 dark:text-slate-100">
+    // `clip` keeps the frame from creating a scroll container, which would
+    // break the donation banner's position: sticky.
+    <div className="outer-accent-frame flex min-h-screen flex-col overflow-x-clip p-3 font-mono text-slate-900 transition-colors duration-200 selection:bg-brand-sky selection:text-white sm:p-5 md:p-7 dark:text-slate-100">
       <div className="bg-grid-light relative mx-auto flex w-full max-w-5xl flex-1 flex-col justify-between border-[3px] border-slate-950 shadow-[6px_6px_0px_#986900] sm:border-4 dark:border-brand-sky dark:shadow-[6px_6px_0px_#008CD5]">
         <TopBanner showToast={showToast} />
 
