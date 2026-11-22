@@ -13,7 +13,7 @@ type TopBannerProps = {
 const EASE = 'duration-300 ease-out motion-reduce:transition-none'
 
 export function TopBanner({ showToast }: TopBannerProps) {
-  const [label, setLabel] = useTemporaryState('SALIN URL')
+  const [label, setLabel] = useTemporaryState('BAGIKAN')
   const [pinned, setPinned] = useState(false)
   const bannerRef = useRef<HTMLElement>(null)
 
@@ -50,13 +50,15 @@ export function TopBanner({ showToast }: TopBannerProps) {
       return
     }
     showToast('URL TIPMI BERHASIL DISALIN!')
-    setLabel('COPIED!')
+    setLabel('TERSALIN!')
   }
 
   return (
     <header
       ref={bannerRef}
       id="top-banner"
+      data-reveal
+      data-reveal-delay="60"
       className={`sticky top-[calc(0.75rem+env(safe-area-inset-top))] z-30 mx-3 mt-3 rounded-md border-2 border-slate-950 bg-[#986900] text-white transition-shadow ${EASE} sm:top-4 sm:mx-5 sm:mt-4 dark:border-brand-sky ${
         pinned
           ? 'shadow-[3px_3px_0px_#020617]'
@@ -151,7 +153,7 @@ export function TopBanner({ showToast }: TopBannerProps) {
                 pinned ? 'max-w-0 opacity-0' : 'max-w-[80px] opacity-100'
               }`}
             >
-              TIPMI
+              TRAKTIR
             </span>
             <ExternalLinkIcon className="h-3.5 w-3.5 shrink-0" />
           </a>

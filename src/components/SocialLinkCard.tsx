@@ -3,6 +3,7 @@ import { DiscordIcon, RobloxIcon, TiktokIcon } from './ui/icons'
 
 type SocialLinkCardProps = {
   link: SocialLink
+  index: number
   onSelect: (link: SocialLink) => void
 }
 
@@ -12,11 +13,13 @@ const ICONS = {
   roblox: RobloxIcon,
 } as const
 
-export function SocialLinkCard({ link, onSelect }: SocialLinkCardProps) {
+export function SocialLinkCard({ link, index, onSelect }: SocialLinkCardProps) {
   const Icon = ICONS[link.icon]
 
   return (
     <a
+      data-reveal
+      data-reveal-delay={440 + index * 80}
       href={link.url}
       target="_blank"
       rel="noopener noreferrer"

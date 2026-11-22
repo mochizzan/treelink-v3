@@ -6,6 +6,7 @@ import { SocialLinkCard } from './components/SocialLinkCard'
 import { Toast } from './components/ui/Toast'
 import { TopBanner } from './components/TopBanner'
 import { socialLinks, type SocialLink } from './data/socialLinks'
+import { useReveal } from './hooks/useReveal'
 import { useTheme } from './hooks/useTheme'
 import { useToast } from './hooks/useToast'
 
@@ -13,6 +14,8 @@ export default function App() {
   const { isDark, toggleTheme } = useTheme()
   const { message, visible, showToast } = useToast()
   const [activeLink, setActiveLink] = useState<SocialLink | null>(null)
+
+  useReveal()
 
   const closeModal = useCallback(() => setActiveLink(null), [])
 
@@ -30,10 +33,11 @@ export default function App() {
             aria-label="Tautan Sosial Media"
             className="flex w-full max-w-xs flex-col gap-4 sm:max-w-sm"
           >
-            {socialLinks.map((link) => (
+            {socialLinks.map((link, index) => (
               <SocialLinkCard
                 key={link.platform}
                 link={link}
+                index={index}
                 onSelect={setActiveLink}
               />
             ))}
@@ -46,7 +50,11 @@ export default function App() {
           showToast={showToast}
         />
 
-        <footer className="w-full border-t-2 border-brand-blue/25 bg-white/75 px-5 py-4 sm:px-8 dark:border-brand-sky/25 dark:bg-[#081726]/85">
+        <footer
+          data-reveal
+          data-reveal-delay="760"
+          className="w-full border-t-2 border-brand-blue/25 bg-white/75 px-5 py-4 sm:px-8 dark:border-brand-sky/25 dark:bg-[#081726]/85"
+        >
           <div className="mx-auto flex max-w-4xl flex-col items-center justify-between gap-2 text-center sm:flex-row sm:text-left">
             <div className="flex items-center gap-2">
               <span className="inline-block h-2.5 w-2.5 shrink-0 rounded-sm bg-brand-amber" />

@@ -66,3 +66,54 @@ body {
     transparent 14px
   );
 }
+
+/* Entrance + scroll reveal -------------------------------------------------
+   One keyframe serves the load-in cascade and the on-scroll reveal; only the
+   stagger differs. Elements settle up-and-right, against the offset shadows. */
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translate3d(var(--reveal-x, -8px), var(--reveal-y, 14px), 0)
+      scale(var(--reveal-scale, 1)) rotate(var(--reveal-rotate, 0deg));
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+}
+
+[data-reveal] {
+  opacity: 0;
+}
+
+[data-reveal][data-visible='pending'] {
+  animation: reveal-in var(--reveal-duration, 480ms)
+    var(--reveal-ease, cubic-bezier(0.22, 1, 0.36, 1)) var(--reveal-delay, 0ms)
+    both;
+}
+
+/* Dropping the animation after it ends avoids leaving a permanent transform
+   (and stacking context) on sticky/raised elements. */
+[data-reveal][data-visible='done'] {
+  opacity: 1;
+}
+
+/* The single loud beat: the avatar lands like a stamp, then the rest of the
+   page quietly snaps into alignment around it. */
+[data-reveal='stamp'] {
+  --reveal-x: 0px;
+  --reveal-y: 0px;
+  --reveal-scale: 1.18;
+  --reveal-rotate: -7deg;
+  --reveal-duration: 640ms;
+  --reveal-ease: cubic-bezier(0.34, 1.45, 0.5, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  [data-reveal][data-visible] {
+    opacity: 1;
+    animation: none;
+    transform: none;
+  }
+}

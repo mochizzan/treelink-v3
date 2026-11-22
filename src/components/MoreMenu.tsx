@@ -55,6 +55,8 @@ export function MoreMenu({ isDark, onToggleTheme, showToast }: MoreMenuProps) {
     <aside
       ref={wrapperRef}
       id="more-drawer-wrapper"
+      data-reveal
+      data-reveal-delay="680"
       className="relative z-40 flex w-full flex-col-reverse shadow-[-4px_-4px_0px_#020617] max-sm:pb-[env(safe-area-inset-bottom)] sm:absolute sm:right-0 sm:top-1/2 sm:w-auto sm:-translate-y-1/2 sm:flex-row-reverse sm:items-center sm:shadow-none"
     >
       <button
