@@ -59,16 +59,23 @@ cypress/downloads/
 .cypress-cache/
 
 # ===========================================================================
-# Agentic harness — local/session state only (committed config stays tracked)
+# Agentic harness — local/session state only (Claude artifacts stay out)
 # ===========================================================================
-.claude/settings.local.json
-.claude/*.local.json
-.claude/.credentials.json
+.claude/
+CLAUDE.md
 .agents/*.local.json
 .cursor/session*
 .opencode/sessions/
 .opencode/cache/
 *.harness.local.*
+
+# ===========================================================================
+# Removed tooling — Playwright e2e/smoke suites (unit tests stay tracked)
+# ===========================================================================
+tests/e2e/
+tests/smoke/
+playwright.config.ts
+playwright.smoke.config.ts
 
 # ===========================================================================
 # Environment & secrets
