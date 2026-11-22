@@ -45,6 +45,8 @@ export function ProfileHeader() {
       </h1>
 
       <span
+        data-reveal
+        data-reveal-delay="350"
         translate="no"
         className="mt-1 block text-[10px] font-medium tracking-widest text-brand-blue dark:text-brand-sky"
       >
