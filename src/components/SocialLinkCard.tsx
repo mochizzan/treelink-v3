@@ -42,11 +42,6 @@ export function SocialLinkCard({ link, index, onSelect }: SocialLinkCardProps) {
           <span className="mt-0.5 block text-[11px] font-medium text-slate-500 group-hover:text-sky-100 dark:text-slate-400">
             {link.handle}
           </span>
-          {link.subHandle && (
-            <span className="mt-0.5 block text-[10px] font-medium text-slate-400 group-hover:text-sky-100/80 dark:text-slate-500">
-              {link.subHandle}
-            </span>
-          )}
         </div>
       </div>
       <span className="pr-1 font-display text-lg font-bold text-brand-blue transition-transform group-hover:translate-x-1 group-hover:text-white dark:text-brand-sky">

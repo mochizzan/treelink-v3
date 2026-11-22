@@ -46,6 +46,15 @@ export function ProfileHeader() {
 
       <p
         data-reveal
+        data-reveal-delay="350"
+        translate="no"
+        className="mt-2 text-xs font-medium tracking-widest text-brand-blue dark:text-brand-sky"
+      >
+        @.onlyreda
+      </p>
+
+      <p
+        data-reveal
         data-reveal-delay="380"
         className="mt-2.5 max-w-xs border-y border-brand-blue/30 px-3 py-2 text-xs font-medium leading-relaxed text-slate-600 sm:max-w-sm sm:text-sm dark:text-slate-300"
       >

@@ -1,7 +1,6 @@
 export type SocialLink = {
   platform: string
   handle: string
-  subHandle?: string
   url: string
   accent: string
   icon: 'tiktok' | 'discord' | 'roblox'
@@ -30,7 +29,6 @@ export const socialLinks: SocialLink[] = [
   {
     platform: 'ROBLOX',
     handle: '@redaliens04 // Games & UGC',
-    subHandle: '@.onlyreda',
     url: 'https://www.roblox.com/users/7853072759/profile',
     accent: '#986900',
     icon: 'roblox',
