@@ -40,7 +40,9 @@ export function getExternalLinkProps(url: string): ExternalLinkProps {
   const userAgent = getUserAgent()
   const isTikTok = TIKTOK.test(userAgent)
 
-  if (isTikTok && ANDROID.test(userAgent)) {
+  // Match every Android WebView, not just TikTok's token, so a stripped UA
+  // still gets the handoff instead of the copy-link dead end.
+  if (ANDROID.test(userAgent) && IN_APP_BROWSER.test(userAgent)) {
     return {
       href: url,
       target: '_self',
