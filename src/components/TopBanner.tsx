@@ -49,7 +49,7 @@ export function TopBanner({ showToast }: TopBannerProps) {
       showToast('GAGAL MENYALIN URL')
       return
     }
-    showToast('URL TIPMI BERHASIL DISALIN!')
+    showToast('URL SOCIABUZZ BERHASIL DISALIN!')
     setLabel('TERSALIN!')
   }
 
@@ -105,7 +105,7 @@ export function TopBanner({ showToast }: TopBannerProps) {
                     pinned ? 'pt-0' : 'pt-1'
                   }`}
                 >
-                  Traktir kopi untuk dukung konten &amp; server komunitas
+                  Traktir kopi untuk dukung konten &amp; server komunitas · Mediashare | SociaBuzz
                 </span>
               </span>
             </div>
@@ -123,7 +123,7 @@ export function TopBanner({ showToast }: TopBannerProps) {
             id="copy-tip-btn"
             type="button"
             onClick={handleCopy}
-            title="Salin URL halaman Tipmi"
+            title="Salin URL halaman SociaBuzz"
             className={`inline-flex min-h-11 flex-1 cursor-pointer items-center justify-center rounded-md border-2 border-slate-950 bg-slate-950 font-display text-xs font-bold uppercase tracking-wider text-white shadow-[2px_2px_0px_#008CD5] transition-[padding,gap,transform] sm:w-auto sm:flex-none sm:gap-1.5 sm:px-3 sm:py-1.5 sm:text-sm ${EASE} ${
               pinned ? 'scale-[0.97] gap-0 px-2 py-1.5' : 'gap-1.5 px-2 py-2'
             }`}
@@ -143,7 +143,7 @@ export function TopBanner({ showToast }: TopBannerProps) {
             href={TIP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            title="Buka halaman Tipmi / Donasi di tab baru"
+            title="Buka halaman SociaBuzz / Donasi di tab baru"
             className={`inline-flex min-h-11 flex-1 items-center justify-center rounded-md border-2 border-slate-950 bg-brand-blue font-display text-xs font-bold uppercase tracking-wider text-white shadow-[2px_2px_0px_#020617] transition-[padding,gap,transform] sm:w-auto sm:flex-none sm:gap-1.5 sm:px-3.5 sm:py-1.5 sm:text-sm ${EASE} ${
               pinned ? 'scale-[0.97] gap-0 px-2 py-1.5' : 'gap-1.5 px-2 py-2'
             }`}

@@ -7,7 +7,7 @@ export type SocialLink = {
   iconBgClass: string
 }
 
-export const TIP_URL = 'https://tipmi.gg/reda'
+export const TIP_URL = 'https://sociabuzz.com/onlyreda/tribe'
 
 export const socialLinks: SocialLink[] = [
   {
