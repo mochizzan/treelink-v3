@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import type { SocialLink } from '../data/socialLinks'
 import { useTemporaryState } from '../hooks/useTemporaryState'
 import { copyText } from '../utils/copyText'
-import { getExternalLinkTarget } from '../utils/externalLink'
+import { getExternalLinkProps } from '../utils/externalLink'
 import { CloseIcon, CopyIcon, ExternalLinkIcon } from './ui/icons'
 
 type LinkActionModalProps = {
@@ -69,6 +69,8 @@ export function LinkActionModal({
     showToast(`URL ${displayLink.platform} BERHASIL DISALIN!`)
     return true
   }
+
+  const directLink = getExternalLinkProps(displayLink?.url ?? '#')
 
   return (
     <div
@@ -137,10 +139,13 @@ export function LinkActionModal({
 
             <a
               id="modal-direct-link"
-              href={displayLink?.url ?? '#'}
-              target={getExternalLinkTarget()}
+              href={directLink.href}
+              target={directLink.target}
               rel="noopener noreferrer"
-              onClick={onClose}
+              onClick={(event) => {
+                directLink.onClick?.(event)
+                onClose()
+              }}
               className="inline-flex w-full items-center justify-center gap-1.5 rounded-md border-2 border-slate-950 bg-brand-blue px-3 py-2.5 font-display text-xs font-bold uppercase tracking-wider text-white shadow-[3px_3px_0px_#020617] transition-all hover:bg-brand-sky active:translate-x-[1px] active:translate-y-[1px] active:shadow-none sm:text-sm"
             >
               <span>DIRECT</span>

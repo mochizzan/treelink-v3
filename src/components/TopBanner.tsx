@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { TIP_URL } from '../data/socialLinks'
 import { useTemporaryState } from '../hooks/useTemporaryState'
 import { copyText } from '../utils/copyText'
-import { getExternalLinkTarget } from '../utils/externalLink'
+import { getExternalLinkProps } from '../utils/externalLink'
 import { CoffeeIcon, CopyIcon, ExternalLinkIcon } from './ui/icons'
 
 type TopBannerProps = {
@@ -17,6 +17,7 @@ export function TopBanner({ showToast }: TopBannerProps) {
   const [label, setLabel] = useTemporaryState('BAGIKAN')
   const [pinned, setPinned] = useState(false)
   const bannerRef = useRef<HTMLElement>(null)
+  const supportLink = getExternalLinkProps(TIP_URL)
 
   // Follow the computed sticky offset so the threshold tracks the safe-area
   // inset and the sm breakpoint instead of a hard-coded scroll distance.
@@ -141,8 +142,7 @@ export function TopBanner({ showToast }: TopBannerProps) {
           </button>
 
           <a
-            href={TIP_URL}
-            target={getExternalLinkTarget()}
+            {...supportLink}
             rel="noopener noreferrer"
             title="Buka halaman SociaBuzz / Donasi"
             className={`inline-flex min-h-11 flex-1 items-center justify-center rounded-md border-2 border-slate-950 bg-brand-blue font-display text-xs font-bold uppercase tracking-wider text-white shadow-[2px_2px_0px_#020617] transition-[padding,gap,transform] sm:w-auto sm:flex-none sm:gap-1.5 sm:px-3.5 sm:py-1.5 sm:text-sm ${EASE} ${
