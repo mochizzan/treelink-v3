@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { TIP_URL } from '../data/socialLinks'
 import { useTemporaryState } from '../hooks/useTemporaryState'
 import { copyText } from '../utils/copyText'
+import { getExternalLinkTarget } from '../utils/externalLink'
 import { CoffeeIcon, CopyIcon, ExternalLinkIcon } from './ui/icons'
 
 type TopBannerProps = {
@@ -141,9 +142,9 @@ export function TopBanner({ showToast }: TopBannerProps) {
 
           <a
             href={TIP_URL}
-            target="_blank"
+            target={getExternalLinkTarget()}
             rel="noopener noreferrer"
-            title="Buka halaman SociaBuzz / Donasi di tab baru"
+            title="Buka halaman SociaBuzz / Donasi"
             className={`inline-flex min-h-11 flex-1 items-center justify-center rounded-md border-2 border-slate-950 bg-brand-blue font-display text-xs font-bold uppercase tracking-wider text-white shadow-[2px_2px_0px_#020617] transition-[padding,gap,transform] sm:w-auto sm:flex-none sm:gap-1.5 sm:px-3.5 sm:py-1.5 sm:text-sm ${EASE} ${
               pinned ? 'scale-[0.97] gap-0 px-2 py-1.5' : 'gap-1.5 px-2 py-2'
             }`}
